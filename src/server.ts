@@ -3,7 +3,7 @@ import { prisma } from './lib/prisma'
 
 const app = fastify()
 
-app.post('/cadastrar', async () => {
+app.get('/cadastrar', async () => {
 	await prisma.trip.create({
 		data: {
 			destination: 'São Paulo',
