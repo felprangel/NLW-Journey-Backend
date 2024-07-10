@@ -13,7 +13,7 @@ export async function confirmTrip(app: FastifyInstance) {
 				}),
 			},
 		},
-		async (request) => {
+		async (request, reply) => {
 			const { tripId } = request.params
 
 			const trip = await prisma.trip.findUnique({
@@ -25,6 +25,11 @@ export async function confirmTrip(app: FastifyInstance) {
 			if (!trip) {
 				throw new Error('Trip not found')
 			}
+
+			if (trip.is_confirmed) {
+				return reply.redirect(`http://localhost:3000/trips/${tripId}`) // mudar pro env
+			}
+
 
 			return { tripId: request.params.tripId }
 		}
