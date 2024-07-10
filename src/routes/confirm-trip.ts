@@ -30,6 +30,14 @@ export async function confirmTrip(app: FastifyInstance) {
 				return reply.redirect(`http://localhost:3000/trips/${tripId}`) // mudar pro env
 			}
 
+			await prisma.trip.update({
+				where: {
+					id: tripId,
+				},
+				data: {
+					is_confirmed: true,
+				},
+			})
 
 			return { tripId: request.params.tripId }
 		}
