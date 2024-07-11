@@ -81,7 +81,7 @@ export async function confirmTrip(app: FastifyInstance) {
 				})
 			)
 
-			return { tripId: request.params.tripId }
+			return reply.redirect(`http://localhost:3000/trips/${tripId}`)
 		}
 	)
 }
