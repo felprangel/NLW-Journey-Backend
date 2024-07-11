@@ -20,6 +20,13 @@ export async function confirmTrip(app: FastifyInstance) {
 				where: {
 					id: tripId,
 				},
+				include: {
+					participants: {
+						where: {
+							is_owner: false,
+						},
+					},
+				},
 			})
 
 			if (!trip) {
